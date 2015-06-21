@@ -33,31 +33,17 @@ def new_data(path):
             yield 'INSERT INTO BodyWeight (date, body_weight_metric, body_fat, comments) VALUES ("%s" , %.14f, 0.0, "")' % (date, kilos)
 
 
+csv_files = glob.glob(path.expanduser('~/Downloads/collate*.csv'))
 dbname = path.expanduser(
     '~/Downloads/FitNotes_Backup_2015_06_19_18_36_19.fitnotes')
-
-csv_files = glob.glob(path.expanduser('~/Downloads/collate*.csv'))
 path = csv_files[0]
 
 
 conn = sqlite3.connect(dbname)
-
 c = conn.cursor()
-
-# Show all tables
-c.execute('SELECT * FROM SQLITE_MASTER')
-table = c.fetchall()
-for line in table:
-    print line[4], "\n"
-
 
 for command in new_data(path):
     c.execute(command)
-
-c.execute('SELECT * FROM BodyWeight')
-table = c.fetchall()
-for line in table:
-    print line
 
 conn.commit()
 conn.close()
