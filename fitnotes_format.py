@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import csv
 
 
@@ -33,4 +35,4 @@ def display(generator):
         print ",".join([line[1]] + ["{0}".format(*triple) for triple in line[2:]])
         print ",".join([''] + ["{1}x{2}".format(*triple) for triple in line[2:]])
 
-display(summarize('FitNotes_Export_2016_03_31_16_30_36.csv'))
+display(summarize('FitNotes_Export_2016_05_02_08_29_22.csv'))
